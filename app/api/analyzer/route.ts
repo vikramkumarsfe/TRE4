@@ -10,7 +10,7 @@ import { getQStashClient } from "@/lib/qstash";
 import { AnalyzerRun } from "@/models";
 
 export const runtime = "nodejs";
-const MAX_PDF_BYTES = 20 * 1024 * 1024;
+const MAX_PDF_BYTES = 20 * 1024 * 2024;
 const uploadDir = analyzerUploadDir;
 
 function cleanName(value: string, fallback: string) {
