@@ -1,3 +1,3 @@
 import type { NextConfig } from "next";
-const config: NextConfig = { output: "standalone" };
+const config: NextConfig = { output: "standalone", serverExternalPackages: ["bullmq"] };
 export default config;

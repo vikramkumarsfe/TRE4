@@ -7,6 +7,8 @@ import { createSession, setSessionCookie } from "@/lib/auth";
 import { passwordDigest } from "@/lib/password";
 const schema = z.object({ name: z.string().min(1).max(100), email: z.string().email().max(254), password: z.string().min(10).max(128) });
 const attempts = new Map<string, { count: number; at: number }>();
+
+
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || "local", current = attempts.get(ip), now = Date.now();
   if (current && now - current.at < 60_000 && current.count >= 5) return NextResponse.json({ error: "Please wait a minute before trying again." }, { status: 429 });

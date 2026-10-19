@@ -14,6 +14,8 @@ RUN addgroup -S nextjs && adduser -S nextjs -G nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nextjs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nextjs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nextjs /app/worker ./worker
+RUN mkdir -p /app/uploads/analyzer && chown -R nextjs:nextjs /app/uploads
 USER nextjs
 EXPOSE 3000
 ENV PORT=3000

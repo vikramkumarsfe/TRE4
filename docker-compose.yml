@@ -6,9 +6,18 @@ services:
       MONGODB_URI: ${MONGODB_URI}
       AUTH_SECRET: ${AUTH_SECRET}
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.8-flash}
+      QSTASH_URL: ${QSTASH_URL:-https://qstash.upstash.io}
+      QSTASH_TOKEN: ${QSTASH_TOKEN:-}
+      QSTASH_CURRENT_SIGNING_KEY: ${QSTASH_CURRENT_SIGNING_KEY:-}
+      QSTASH_NEXT_SIGNING_KEY: ${QSTASH_NEXT_SIGNING_KEY:-}
+      ANALYZER_WORKER_URL: ${ANALYZER_WORKER_URL:-}
+      ANALYZER_UPLOAD_DIR: /app/uploads/analyzer
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     ports: ["3000:3000"]
+    volumes: ["analyzer_uploads:/app/uploads/analyzer"]
     depends_on:
       mongo:
         condition: service_healthy
@@ -26,3 +35,4 @@ services:
       retries: 5
 volumes:
   mongo_data:
+  analyzer_uploads:
